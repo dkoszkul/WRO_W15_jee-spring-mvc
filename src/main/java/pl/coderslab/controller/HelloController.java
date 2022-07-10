@@ -1,5 +1,6 @@
 package pl.coderslab.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import java.time.LocalTime;
 
 import static java.time.LocalTime.of;
 
+@Slf4j
 @Controller
 public class HelloController {
 
@@ -20,8 +22,9 @@ public class HelloController {
 
     @GetMapping("helloView")
     public String helloView(Model model) {
-
+        log.info("Starting helloView generation");
         LocalTime now = LocalTime.now();
+        log.debug("Right now is {}", now);
         // LocalTime now = LocalTime.of(21, 0);
         String color, backgroundColor;
 
@@ -32,9 +35,11 @@ public class HelloController {
             backgroundColor = "black";
             color = "white";
         }
+        log.debug("Color is {}, backgroundColor is {}", color, backgroundColor);
 
         model.addAttribute("color", color);
         model.addAttribute("backgroundColor", backgroundColor);
+        log.info("Finish helloView generation");
         return "home";
     }
 }
